@@ -27,7 +27,7 @@ check_ufw_status() {
 
 enable_ufw() {
     echo -e "${BOLD}${GREEN}Enabling UFW...${NC}"
-    ensure_ssh_access  
+    ensure_ssh_access 
     if sudo ufw enable; then
         echo -e "${BOLD}${GREEN}Successfully enabled UFW.${NC}"
     else
@@ -65,7 +65,7 @@ deny_port() {
     if [ "$port" = "22" ]; then
         echo -e "${BOLD}${RED}Cannot deny SSH port 22. This port must remain open for security reasons.${NC}"
         return
-    }
+    fi
     
     echo -e "${BOLD}${RED}Denying port $port (TCP and UDP, IPv4 and IPv6)...${NC}"
     if sudo ufw deny $port/tcp && sudo ufw deny $port/udp; then
@@ -91,7 +91,7 @@ deny_service() {
     if [ "$service" = "ssh" ]; then
         echo -e "${BOLD}${RED}Cannot deny SSH service. This service must remain open for security reasons.${NC}"
         return
-    }
+    fi
     
     echo -e "${BOLD}${RED}Denying service $service...${NC}"
     if sudo ufw deny $service; then
@@ -114,10 +114,6 @@ show_menu() {
     clear
     echo -e "${BOLD}${BLUE}====================================${NC}"
     echo -e "${BOLD}${BLUE}    UFW Firewall Management Tool    ${NC}"
-    echo -e "${BOLD}${BLUE}====================================${NC}"
-    echo -e "${BOLD}${CYAN}Current Time (UTC): 2024-12-24 04:21:46${NC}"
-    echo -e "${BOLD}${CYAN}User: KarinaBash${NC}"
-    echo -e "${BOLD}${YELLOW}SSH Protection: Active (Port 22)${NC}"
     echo -e "${BOLD}${BLUE}====================================${NC}"
     echo
     echo "1. Check UFW Status"
